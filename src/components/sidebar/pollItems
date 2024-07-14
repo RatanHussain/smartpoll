@@ -1,0 +1,11 @@
+/** @format */
+
+import React from 'react';
+
+export default function pollItems() {
+	return (
+		<div>
+			<p>owiejfoi</p>
+		</div>
+	);
+}
