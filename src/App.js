@@ -6,7 +6,6 @@ import Sidebar from './components/sidebar/Sidebar';
 import { useEffect, useState } from 'react';
 import poll from './components/Data/Polldata';
 import nextId from 'react-id-generator';
-import PollItems from './components/sidebar/pollItems.jsx';
 
 function App() {
 	let [polls, setPolls] = useState([
