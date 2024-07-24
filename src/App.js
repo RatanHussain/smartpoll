@@ -92,7 +92,9 @@ function App() {
 		let seletedPoll = polls.find((p) => p.id === seletingPoll.id);
 		setSelectedPoll(seletedPoll);
 	};
-	let handleSearch = () => {};
+	let handleSearch = () => { };
+
+	 
 
 	return (
 		<Container className='my-5'>

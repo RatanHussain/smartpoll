@@ -4,18 +4,18 @@
 import React, { useState } from 'react';
 import { Button, Input, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PollItems from './pollItems.jsx';
+import MainFrom from '../forms/MainFrom.jsx';
 
 export default function Sidebar({
 	polls,
 	seletPoll,
 	handleSearch,
-  searchTurm,
+	searchTurm,
 }) {
-  let [modalIs,setModalIs] = useState(false)
-  let toggleModel = () => {
-    setModalIs(!modalIs)
-
-  };
+	let [modalIs, setModalIs] = useState(false);
+	let toggleModel = () => {
+		setModalIs(!modalIs);
+	};
 	return (
 		<div className='p-5'>
 			<div className='d-flex mb-5'>
@@ -31,16 +31,15 @@ export default function Sidebar({
 			</div>
 			<h3>List of Polls</h3>
 			<hr />
-      <PollItems polls={polls} seletPoll={seletPoll} />
-      <Modal isOpen={modalIs} toggle={toggleModel} >
-        <ModalHeader toggle={toggleModel}>
-            <h4>Create A Poll</h4>
-        </ModalHeader>
-        <ModalBody>
-          <h5>This is modal body</h5>
-        </ModalBody>
-
-      </Modal>
+			<PollItems polls={polls} seletPoll={seletPoll} />
+			<Modal isOpen={modalIs} toggle={toggleModel}>
+				<ModalHeader toggle={toggleModel}>
+					<h4>Create A Poll</h4>
+				</ModalHeader>
+				<ModalBody>
+					<MainFrom/>
+				</ModalBody>
+			</Modal>
 		</div>
 	);
 }
