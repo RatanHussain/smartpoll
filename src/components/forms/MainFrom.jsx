@@ -2,11 +2,14 @@
 
 import React, { useState } from 'react';
 import Forms from './form';
+import nextId from 'react-id-generator';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function MainFrom(submitData, buttonValue) {
+export default function MainFrom({ buttonValue, submitData }) {
 	let optionsArray = [
-		{ id: 45456, value: 'C Programming', vote: 0 },
-		{ id: 45654, value: 'python Programming', vote: 0 },
+		{ id: nextId(), value: '', vote: 0 },
+		{ id: nextId(), value: '', vote: 0 },
 	];
 
 	let [formData, setFromData] = useState({
@@ -25,15 +28,15 @@ export default function MainFrom(submitData, buttonValue) {
 	};
 
 	let handleOptionChange = (e, index) => {
-		let { options } = formData;
-		options[index] = e.target.value;
-		setFromData.options = options;
+		let oldData = { ...formData };
+		oldData.options[index].value = e.target.value;
+		setFromData(oldData);
 	};
 	let createOption = () => {
-		let { options } = formData;
-		if (options.length < 5) {
-			options.push({
-				id: Math.floor(Math.random() * 50000),
+		let oldData = { ...formData };
+		if (oldData.options.length < 5) {
+			oldData.options.push({
+				id: nextId(),
 				value: '',
 				vote: 0,
 			});
@@ -41,31 +44,27 @@ export default function MainFrom(submitData, buttonValue) {
 			alert('You can create max 5 options');
 		}
 
-		setFromData.options = options;
+		setFromData(oldData);
 	};
+
 	let detetOption = (index) => {
-		let { options } = formData;
-		if (options.length > 2) {
-			options.splice(index, 1);
+		let oldData = { ...formData };
+		if (oldData.options.length > 2) {
+			oldData.options.splice(index, 1);
 		} else {
 			alert('You must have two options.');
 		}
 
-		setFromData.options = options;
+		setFromData(oldData);
 	};
 
 	let handleSubmit = (e) => {
 		e.preventDefault();
-		let { error, isValid } = validation();
 
-		if (isValid) {
-			let { title, description, options } = formData;
-			submitData({
-				title,
-				description,
-				options,
-			});
-			e.target.reset();
+		let validate = validation();
+
+		if (validate.isValid) {
+			submitData(formData);
 			setFromData({
 				title: '',
 				description: '',
@@ -73,32 +72,34 @@ export default function MainFrom(submitData, buttonValue) {
 				error: {},
 			});
 		} else {
-			setFromData({ error });
+			toast.error(
+				validate.error.title ||
+					validate.error.description ||
+					validate.error.options
+			);
 		}
 	};
-
 	let validation = () => {
 		let error = {};
 		let optionError = [];
-		let { title, description, options } = formData;
 
-		if (!title) {
+		if (!formData.title) {
 			error.title = 'Please enter a title';
-		} else if (title.length < 20) {
+		} else if (formData.title.length < 10) {
 			error.title = 'Your title is too short';
-		} else if (title.length > 100) {
+		} else if (formData.title.length > 100) {
 			error.title = 'Your title is too long';
 		}
 
-		if (!description) {
+		if (!formData.description) {
 			error.description = 'Please provide description';
-		} else if (description.length < 100) {
+		} else if (formData.description.length < 20) {
 			error.description = 'Your description is to short';
-		} else if (description.length > 500) {
+		} else if (formData.description.length > 500) {
 			error.description = 'Your description is to long';
 		}
 
-		options.forEach((opt, index) => {
+		formData.options.forEach((opt, index) => {
 			if (!opt.value) {
 				optionError[index] = 'Please enter values of options';
 			} else if (opt.value > 100) {
@@ -117,7 +118,8 @@ export default function MainFrom(submitData, buttonValue) {
 	};
 
 	return (
-		<div>
+		<>
+			<ToastContainer />
 			<Forms
 				title={formData.title}
 				description={formData.description}
@@ -128,8 +130,8 @@ export default function MainFrom(submitData, buttonValue) {
 				createOption={createOption}
 				detetOption={detetOption}
 				handleSubmit={handleSubmit}
-				buttonValue={buttonValue || 'Create btn'}
+				buttonValue={buttonValue}
 			/>
-		</div>
+		</>
 	);
 }

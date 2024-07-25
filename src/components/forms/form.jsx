@@ -2,7 +2,8 @@
 
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import React from 'react';
-import { Button, Form, FormFeedback, FormGroup, Label } from 'reactstrap';
+import { ToastContainer } from 'react-toastify';
+import { Button, Form, FormFeedback, FormGroup, Label , Input} from 'reactstrap';
 
 export default function Forms({
 	title,
@@ -17,10 +18,10 @@ export default function Forms({
 	buttonValue,
 }) {
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form >
 			<FormGroup>
 				<Label htmlFor='title'>Title</Label>
-				<input
+				<Input
 					type='text'
 					name='title'
 					id='title'
@@ -34,7 +35,7 @@ export default function Forms({
 			</FormGroup>
 			<FormGroup>
 				<Label htmlFor='description'>Description</Label>
-				<input
+				<Input
 					type='textarea'
 					name='description'
 					id='description'
@@ -47,30 +48,34 @@ export default function Forms({
 				<FormFeedback>{error.description}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
-				<Label htmlFor='options'>
-					Options <span className='ms-5 btn-primary btn' onClick={createOption}>Add Option</span>
+				<Label htmlFor='options' className='d-flex'>
+					<span className='mt-2'>Options:</span> <span className={`${options.length >= 5 ? 'd-none' : ''} ms-auto btn-primary btn`} onClick={createOption}>Add Option</span>
 				</Label>
 				{options.map((opt, index) => (
 					<div key={opt.id} className='d-flex my-2'>
 						<input
 							type='text'
-							value={options.value}
-							onChange={() => handleOptionChange(index)}
+							value={opt.value}
+							onChange={(e) => handleOptionChange(e , index)}
 							onInvalid={error.options ? true : false}
+							className='form-control'
+							placeholder='Enter poll option here'
 						/>
 						<Button
 							onClick={() => detetOption(index)}
                             disabled={options.length <= 2 ? true : false}
-                            className='denger'
+                            className={`${options.length <= 2 ? 'd-none' : 'bg-danger'} ms-2 btn btn-outline-denger`}
                         >
-							Delete poll
+							{options.length <= 2 ? '' : 'Delete'}
 						</Button>
 					</div>
 				))}
             </FormGroup>
-            <Button
+			<Button
+				className='form-control btn btn-success'
             onClick={handleSubmit}
-            >submit</Button>
+			>{buttonValue}</Button>
+			<ToastContainer/>
 		</Form>
 	);
 }

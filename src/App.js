@@ -56,6 +56,7 @@ function App() {
 	]);
 	let [selectedPoll, setSelectedPoll] = useState({});
 	let [searchTurm, setSearchTurm] = useState('');
+	let [buttonValue,setButtonValue] = useState('Create Poll')
 
 	// useEffect(() => {
 	// 	setPolls(poll);
@@ -94,7 +95,17 @@ function App() {
 	};
 	let handleSearch = () => { };
 
-	 
+
+
+	let  submitData = (formData)=> {
+		let oldpull = [...polls]
+		oldpull.push(formData)
+		setPolls(oldpull)
+		
+	}
+
+
+
 
 	return (
 		<Container className='my-5'>
@@ -104,6 +115,8 @@ function App() {
 						handleSearch={handleSearch}
 						polls={polls}
 						seletPoll={seletPoll}
+						submitData={submitData}
+						buttonValue={buttonValue}
 					/>
 				</Col>
 				<Col md={4}>

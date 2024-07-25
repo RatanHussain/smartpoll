@@ -11,6 +11,8 @@ export default function Sidebar({
 	seletPoll,
 	handleSearch,
 	searchTurm,
+	submitData,
+	buttonValue,
 }) {
 	let [modalIs, setModalIs] = useState(false);
 	let toggleModel = () => {
@@ -37,7 +39,7 @@ export default function Sidebar({
 					<h4>Create A Poll</h4>
 				</ModalHeader>
 				<ModalBody>
-					<MainFrom/>
+					<MainFrom submitData={submitData} buttonValue={buttonValue} />
 				</ModalBody>
 			</Modal>
 		</div>
