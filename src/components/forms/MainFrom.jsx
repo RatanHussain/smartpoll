@@ -13,6 +13,7 @@ export default function MainFrom({ buttonValue, submitData }) {
 	];
 
 	let [formData, setFromData] = useState({
+		id: nextId(),
 		title: '',
 		description: '',
 		options: optionsArray,

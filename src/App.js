@@ -98,10 +98,8 @@ function App() {
 
 
 	let  submitData = (formData)=> {
-		let oldpull = [...polls]
-		oldpull.push(formData)
-		setPolls(oldpull)
-		
+		setPolls([...polls,formData])
+
 	}
 
 
