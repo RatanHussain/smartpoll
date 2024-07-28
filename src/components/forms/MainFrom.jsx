@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Forms from './form';
 import nextId from 'react-id-generator';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function MainFrom({ buttonValue, submitData }) {
 	let optionsArray = [
