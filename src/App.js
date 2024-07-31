@@ -15,10 +15,10 @@ function App() {
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
-				{ id: 45678, value: 'C Programming', vote: 0 },
-				{ id: 45378, value: 'C Programming', vote: 0 },
-				{ id: 45378, value: 'C Programming', vote: 0 },
-				{ id: 45387, value: 'C Programming', vote: 0 },
+				{ id: 4564578, value: 'sdfgaogramming', vote: 0 },
+				{ id: 453578, value: 'HFdgamming', vote: 0 },
+				{ id: 454378, value: 'sdfnaSDFmming', vote: 0 },
+				{ id: 45354787, value: 'DSGramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
@@ -29,10 +29,10 @@ function App() {
 			title: 'Do You know HTML?',
 			description: 'There are lot of  them what is your favorite?',
 			options: [
-				{ id: 45423, value: 'C Programming', vote: 0 },
-				{ id: 45645, value: 'C Programming', vote: 0 },
-				{ id: 37834, value: 'C Programming', vote: 0 },
-				{ id: 48648, value: 'C Programming', vote: 0 },
+				{ id: 4545423, value: 'sxdfgdfgming', vote: 0 },
+				{ id: 45456645, value: 'sdfsdfgogramming', vote: 0 },
+				{ id: 37345834, value: 'sdndogramming', vote: 0 },
+				{ id: 483456648, value: 'dfgsdPrsdgsdogramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
@@ -44,10 +44,10 @@ function App() {
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
-				{ id: 45456, value: 'C Programming', vote: 0 },
-				{ id: 45654, value: 'C Programming', vote: 0 },
-				{ id: 45685, value: 'C Programming', vote: 0 },
-				{ id: 45648, value: 'C Programming', vote: 0 },
+				{ id: 45434556, value: 'dfgamming', vote: 0 },
+				{ id: 45645654, value: 'dsfgamming', vote: 0 },
+				{ id: 4545685, value: 'sdfgogramming', vote: 0 },
+				{ id: 453467648, value: 'sdhadramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
@@ -58,6 +58,8 @@ function App() {
 	let [searchTurm, setSearchTurm] = useState('');
 	let [buttonValue,setButtonValue] = useState('Create Poll')
 
+
+	console.log(selectedPoll)
 	// useEffect(() => {
 	// 	setPolls(poll);
 	// }, []);
@@ -90,7 +92,7 @@ function App() {
 	};
 
 	let seletPoll = (seletingPoll) => {
-		let seletedPoll = polls.find((p) => p.id === seletingPoll.id);
+		let seletedPoll = polls.find((p) => p.id === seletingPoll);
 		setSelectedPoll(seletedPoll);
 	};
 	let handleSearch = () => { };
@@ -118,7 +120,7 @@ function App() {
 					/>
 				</Col>
 				<Col md={4}>
-					<MainFile />
+					<MainFile selectedPoll={selectedPoll} />
 				</Col>
 			</Row>
 		</Container>

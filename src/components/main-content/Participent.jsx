@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Participent({
 	getOpinion,
-	poll,
+	selectedPoll,
 	openModal,
 	deletePoll,
 }) {
@@ -81,11 +81,11 @@ export default function Participent({
 				<Button
 					type='button'
 					className='ms-1 bg-danger'
-					onClick={() => deletePoll(poll.id)}>
+					onClick={() => deletePoll(selectedPoll.id)}>
 					Delete
 				</Button>
 			</div>
-			{poll.options.map((opt) => (
+			{selectedPoll.options.map((opt) => (
 				<FormGroup className='my-2' key={opt.id}>
 					<Label className='d-flex'>
 						<Input type='radio' value={opt.value} name='selectedOption' />
@@ -107,8 +107,8 @@ export default function Participent({
 								textAlign: 'center',
 								padding: '5px 15px',
 							}}>
-							{poll.totalVote > 0
-								? ((100 * opt.vote) / poll.totalVote).toFixed(1)
+							{selectedPoll.totalVote > 0
+								? ((100 * opt.vote) / selectedPoll.totalVote).toFixed(1)
 								: 0}
 							%
 						</span>

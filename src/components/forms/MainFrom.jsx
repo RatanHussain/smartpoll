@@ -5,7 +5,6 @@ import Forms from './form';
 import nextId from 'react-id-generator';
 import { toast, ToastContainer } from 'react-toastify';
 
-
 export default function MainFrom({ buttonValue, submitData }) {
 	let optionsArray = [
 		{ id: nextId(), value: '', vote: 0 },
@@ -69,6 +68,7 @@ export default function MainFrom({ buttonValue, submitData }) {
 			setFromData({
 				title: '',
 				description: '',
+
 				options: optionsArray,
 				error: {},
 			});
