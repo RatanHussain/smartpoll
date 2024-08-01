@@ -86,7 +86,7 @@ function App() {
 
 	let deletePoll = (deletedPoll) => {
 		let oldPolls = [...polls];
-		let newPoll = oldPolls.filter((p) => p.id !== deletedPoll.id);
+		let newPoll = oldPolls.filter((p) => p.id !== deletedPoll);
 		setPolls(newPoll);
 		setSelectedPoll('');
 	};
@@ -120,7 +120,7 @@ function App() {
 					/>
 				</Col>
 				<Col md={4}>
-					<MainFile selectedPoll={selectedPoll} />
+					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} />
 				</Col>
 			</Row>
 		</Container>

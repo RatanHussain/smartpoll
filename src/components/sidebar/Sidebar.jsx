@@ -34,14 +34,14 @@ export default function Sidebar({
 			<h3>List of Polls</h3>
 			<hr />
 			<PollItems polls={polls} seletPoll={seletPoll} />
-			{/* <Modal isOpen={modalIs} toggle={toggleModel}>
+			<Modal isOpen={modalIs} toggle={toggleModel}>
 				<ModalHeader toggle={toggleModel}>
 					<h4>Create A Poll</h4>
 				</ModalHeader>
 				<ModalBody>
 					<MainFrom submitData={submitData} buttonValue={buttonValue} />
 				</ModalBody>
-			</Modal> */}
+			</Modal>
 		</div>
 	);
 }

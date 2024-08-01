@@ -3,21 +3,22 @@
 import React, { useState } from 'react';
 import Participent from './Participent';
 
-export default function MainFile({ selectedPoll }) {
-	if (selectedPoll) {
+export default function MainFile({ selectedPoll,deletePoll }) {
+	if (!Object.keys(selectedPoll).length > 0) {
 		return (
 			<div>
-				<h1>Main file is here</h1>
-				<Participent selectedPoll={selectedPoll} />
+				<h1>Welcome to my Application</h1>
+				<h4>
+					You can create as many poll as you want. Click the new button to
+					create a new poll.To check details of a poll please select from the
+					left sidebar. By selecting a poll you can check it's details,
+					participate and check others opinion about this poll
+				</h4>
 			</div>
 		);
 	} else {
 		return (
-			<h4>
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate
-				iste reiciendis distinctio ullam vel a id vitae recusandae nisi ab.
-				Ratione natus libero et excepturi enim! Natus modi nihil similique?
-			</h4>
+			<Participent selectedPoll={selectedPoll} deletePoll={deletePoll} />
 		);
 	}
 }

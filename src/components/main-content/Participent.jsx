@@ -32,12 +32,12 @@ export default function Participent({
 		e.preventDefault();
 		let validation = validate();
 
-		if (validate.isValid) {
-			// getOpinion({
-			// 	pollId: poll.id,
-			// 	name: partiData.name,
-			// 	selectedOption: partiData.selectedOption,
-			// });
+		if (validation.isValid) {
+			getOpinion({
+				pollId: selectedPoll.id,
+				name: partiData.name,
+				selectedOption: partiData.selectedOption,
+			});
 			setPartiData({
 				name: '',
 				selectedOption: '',
@@ -97,7 +97,6 @@ export default function Participent({
 								textAlign: 'center',
 								padding: '5px 15px',
 							}}>
-							{' '}
 							{opt.vote}
 						</span>
 						<span
