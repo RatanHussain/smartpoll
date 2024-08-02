@@ -2,8 +2,14 @@
 
 import React, { useState } from 'react';
 import Participent from './Participent';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import MainFrom from '../forms/MainFrom';
 
-export default function MainFile({ selectedPoll,deletePoll }) {
+export default function MainFile({ selectedPoll, deletePoll,getOpinion }) {
+	let [modal, setModal] = useState(false);
+	let openModal = () => {
+		setModal(!modal);
+	};
 	if (!Object.keys(selectedPoll).length > 0) {
 		return (
 			<div>
@@ -18,7 +24,22 @@ export default function MainFile({ selectedPoll,deletePoll }) {
 		);
 	} else {
 		return (
-			<Participent selectedPoll={selectedPoll} deletePoll={deletePoll} />
+			<>
+				<Participent
+					selectedPoll={selectedPoll}
+					deletePoll={deletePoll}
+					openModal={openModal}
+					getOpinion={getOpinion}
+				/>
+				<Modal isOpen={modal} toggle={openModal}>
+					<ModalHeader toggle={openModal}>
+						Update Poll
+					</ModalHeader>
+					<ModalBody>
+						<MainFrom buttonValue={'Update Poll'} />
+					</ModalBody>
+				</Modal>
+			</>
 		);
 	}
 }

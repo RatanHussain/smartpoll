@@ -70,6 +70,8 @@ export default function Participent({
 
 	return (
 		<Form onSubmit={handleSubmit}>
+				<h2>{selectedPoll.title}</h2>
+				<h5>{selectedPoll.description}</h5>
 			<div className='d-flex'>
 				<h4>Options</h4>
 				<Button

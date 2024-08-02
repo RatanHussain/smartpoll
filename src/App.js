@@ -22,7 +22,7 @@ function App() {
 			],
 			created: new Date(),
 			totalVote: 0,
-			opinions: [],
+			 : [],
 		},
 		{
 			id: '4545184',
@@ -104,6 +104,24 @@ function App() {
 
 	}
 
+	let getOpinion = (response) => {
+		let oldData = { ...polls }
+		let poll = oldData.find(p => p.id === response.id)
+		let option = poll.find(op => op.id === response.selectedOption)
+
+		poll.totalVote++
+		option.vote++
+		let opinion = {
+			name: response.name,
+			option: response.selectedOption,
+			id: nextId()
+		}
+
+		poll.opinions.push(opinion)
+		setPolls(oldData)
+
+	}
+
 
 
 
@@ -120,7 +138,7 @@ function App() {
 					/>
 				</Col>
 				<Col md={4}>
-					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} />
+					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} getOpinion={getOpinion} />
 				</Col>
 			</Row>
 		</Container>
