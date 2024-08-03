@@ -22,7 +22,7 @@ function App() {
 			],
 			created: new Date(),
 			totalVote: 0,
-			 : [],
+			opinions : [],
 		},
 		{
 			id: '4545184',

@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Forms from './form';
 import nextId from 'react-id-generator';
 import { toast, ToastContainer } from 'react-toastify';
 
-export default function MainFrom({ buttonValue, submitData }) {
+export default function MainFrom({ buttonValue, submitData, updatePoll }) {
 	let optionsArray = [
 		{ id: nextId(), value: '', vote: 0 },
 		{ id: nextId(), value: '', vote: 0 },
@@ -17,6 +17,16 @@ export default function MainFrom({ buttonValue, submitData }) {
 		description: '',
 		options: optionsArray,
 		error: {},
+	});
+
+	useEffect(() => {
+		if (updatePoll && Object.keys(updatePoll).length > 0) {
+			let oldData = {...formData };
+			oldData.title = updatePoll.title;
+			oldData.description = updatePoll.description;
+			oldData.options = updatePoll.options;
+			setFromData(oldData);
+		}
 	});
 
 	let handleChange = (e) => {
@@ -122,11 +132,8 @@ export default function MainFrom({ buttonValue, submitData }) {
 		<>
 			<ToastContainer />
 			<Forms
-				title={formData.title}
-				description={formData.description}
-				options={formData.options}
+				poll={formData}
 				handleChange={handleChange}
-				error={formData.error}
 				handleOptionChange={handleOptionChange}
 				createOption={createOption}
 				detetOption={detetOption}

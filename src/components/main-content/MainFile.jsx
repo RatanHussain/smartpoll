@@ -36,7 +36,7 @@ export default function MainFile({ selectedPoll, deletePoll,getOpinion }) {
 						Update Poll
 					</ModalHeader>
 					<ModalBody>
-						<MainFrom buttonValue={'Update Poll'} />
+						<MainFrom buttonValue={'Update Poll'} updatePoll={selectedPoll} isUpdate={true} />
 					</ModalBody>
 				</Modal>
 			</>
