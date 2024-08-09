@@ -17,9 +17,9 @@ export default function Participent({
 		error: {},
 	});
 
-	console.log(partiData.name);
-	console.log(partiData.selectedOption);
-	console.log(partiData.error);
+	// console.log(partiData.name);
+	// console.log(partiData.selectedOption);
+	// console.log(partiData.error);
 
 	let handleChange = (e) => {
 		let oldData = { ...partiData };

@@ -5,7 +5,7 @@ import Participent from './Participent';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import MainFrom from '../forms/MainFrom';
 
-export default function MainFile({ selectedPoll, deletePoll,getOpinion }) {
+export default function MainFile({ selectedPoll, deletePoll, getOpinion,updatePoll }) {
 	let [modal, setModal] = useState(false);
 	let openModal = () => {
 		setModal(!modal);
@@ -25,6 +25,7 @@ export default function MainFile({ selectedPoll, deletePoll,getOpinion }) {
 	} else {
 		return (
 			<>
+				<hr className='my-5' />
 				<Participent
 					selectedPoll={selectedPoll}
 					deletePoll={deletePoll}
@@ -32,11 +33,14 @@ export default function MainFile({ selectedPoll, deletePoll,getOpinion }) {
 					getOpinion={getOpinion}
 				/>
 				<Modal isOpen={modal} toggle={openModal}>
-					<ModalHeader toggle={openModal}>
-						Update Poll
-					</ModalHeader>
+					<ModalHeader toggle={openModal}>Update Poll</ModalHeader>
 					<ModalBody>
-						<MainFrom buttonValue={'Update Poll'} updatePoll={selectedPoll} isUpdate={true} />
+						<MainFrom
+							buttonValue={'Update Poll'}
+							poll={selectedPoll}
+							updatePoll={updatePoll}
+							isUpdate={true}
+						/>
 					</ModalBody>
 				</Modal>
 			</>

@@ -5,7 +5,13 @@ import Forms from './form';
 import nextId from 'react-id-generator';
 import { toast, ToastContainer } from 'react-toastify';
 
-export default function MainFrom({ buttonValue, submitData, updatePoll }) {
+export default function MainFrom({
+	buttonValue,
+	submitData,
+	updatePoll,
+	isUpdate,
+	poll,
+}) {
 	let optionsArray = [
 		{ id: nextId(), value: '', vote: 0 },
 		{ id: nextId(), value: '', vote: 0 },
@@ -20,14 +26,14 @@ export default function MainFrom({ buttonValue, submitData, updatePoll }) {
 	});
 
 	useEffect(() => {
-		if (updatePoll && Object.keys(updatePoll).length > 0) {
-			let oldData = {...formData };
-			oldData.title = updatePoll.title;
-			oldData.description = updatePoll.description;
-			oldData.options = updatePoll.options;
+		if (poll && Object.keys(poll).length > 0) {
+			let oldData = { ...formData };
+			oldData.title = poll.title;
+			oldData.description = poll.description;
+			oldData.options = poll.options;
 			setFromData(oldData);
 		}
-	});
+	}, [isUpdate]);
 
 	let handleChange = (e) => {
 		let oldata = { ...formData };
@@ -74,14 +80,20 @@ export default function MainFrom({ buttonValue, submitData, updatePoll }) {
 		let validate = validation();
 
 		if (validate.isValid) {
-			submitData(formData);
-			setFromData({
-				title: '',
-				description: '',
-
-				options: optionsArray,
-				error: {},
-			});
+			let { title, description, options } = formData;
+			let addPoll = { title, description, options };
+			if (isUpdate) {
+				addPoll.id = poll.id;
+				submitData(addPoll);
+			} else {
+				submitData(addPoll);
+				setFromData({
+					title: '',
+					description: '',
+					options: optionsArray,
+					error: {},
+				});
+			}
 		} else {
 			toast.error(
 				validate.error.title ||

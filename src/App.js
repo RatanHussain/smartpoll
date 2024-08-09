@@ -59,7 +59,7 @@ function App() {
 	let [buttonValue,setButtonValue] = useState('Create Poll')
 
 
-	console.log(selectedPoll)
+	// console.log(selectedPoll)
 	// useEffect(() => {
 	// 	setPolls(poll);
 	// }, []);
@@ -99,8 +99,8 @@ function App() {
 
 
 
-	let  submitData = (formData)=> {
-		setPolls([...polls,formData])
+	let  submitData = (addPoll)=> {
+		setPolls([...polls,addPoll])
 
 	}
 
@@ -138,7 +138,7 @@ function App() {
 					/>
 				</Col>
 				<Col md={4}>
-					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} getOpinion={getOpinion} />
+					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} getOpinion={getOpinion} updatePoll={updatePoll} />
 				</Col>
 			</Row>
 		</Container>
