@@ -22,7 +22,7 @@ function App() {
 			],
 			created: new Date(),
 			totalVote: 0,
-			opinions : [],
+			opinions: [],
 		},
 		{
 			id: '4545184',
@@ -56,8 +56,7 @@ function App() {
 	]);
 	let [selectedPoll, setSelectedPoll] = useState({});
 	let [searchTurm, setSearchTurm] = useState('');
-	let [buttonValue,setButtonValue] = useState('Create Poll')
-
+	let [buttonValue, setButtonValue] = useState('Create Poll');
 
 	// console.log(selectedPoll)
 	// useEffect(() => {
@@ -95,40 +94,34 @@ function App() {
 		let seletedPoll = polls.find((p) => p.id === seletingPoll);
 		setSelectedPoll(seletedPoll);
 	};
-	let handleSearch = () => { };
+	let handleSearch = () => {};
 
-
-
-	let  submitData = (addPoll)=> {
-		setPolls([...polls,addPoll])
-
-	}
+	let submitData = (addPoll) => {
+		setPolls([...polls, addPoll]);
+	};
 
 	let getOpinion = (response) => {
-		let oldData = { ...polls }
-		let poll = oldData.find(p => p.id === response.id)
-		let option = poll.find(op => op.id === response.selectedOption)
+		let oldData = polls;
+		let poll = oldData.find((p) => p.id === response.pollId);
+		let option = poll.options.find((op) => op.id == response.selectedOption);
 
-		poll.totalVote++
-		option.vote++
+		poll.totalVote++;
+		option.vote = option.vote + 1;
+
 		let opinion = {
 			name: response.name,
 			option: response.selectedOption,
-			id: nextId()
-		}
+			id: nextId(),
+		};
 
-		poll.opinions.push(opinion)
-		setPolls(oldData)
-
-	}
-
-
-
+		poll.opinions.push(opinion);
+		setPolls(oldData);
+	};
 
 	return (
 		<Container className='my-5'>
 			<Row>
-				<Col md={4}>
+				<Col sm={6} md={6}>
 					<Sidebar
 						handleSearch={handleSearch}
 						polls={polls}
@@ -137,8 +130,13 @@ function App() {
 						buttonValue={buttonValue}
 					/>
 				</Col>
-				<Col md={4}>
-					<MainFile selectedPoll={selectedPoll} deletePoll={deletePoll} getOpinion={getOpinion} updatePoll={updatePoll} />
+				<Col sm={6} md={6}>
+					<MainFile
+						selectedPoll={selectedPoll}
+						deletePoll={deletePoll}
+						getOpinion={getOpinion}
+						updatePoll={updatePoll}
+					/>
 				</Col>
 			</Row>
 		</Container>

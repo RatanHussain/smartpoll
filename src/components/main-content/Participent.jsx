@@ -28,16 +28,24 @@ export default function Participent({
 		setPartiData(oldData);
 	};
 
+	let handleOpChange = (e) => {
+		let oldData = { ...partiData };
+		let names = e.target.name;
+		oldData[names] = e.target.id;
+		setPartiData(oldData);
+	};
+
 	let handleSubmit = (e) => {
 		e.preventDefault();
 		let validation = validate();
 
 		if (validation.isValid) {
-			getOpinion({
+			let opiData = {
 				pollId: selectedPoll.id,
 				name: partiData.name,
 				selectedOption: partiData.selectedOption,
-			});
+			};
+			getOpinion(opiData);
 			setPartiData({
 				name: '',
 				selectedOption: '',
@@ -47,7 +55,7 @@ export default function Participent({
 			let oldData = partiData;
 			oldData.error = validation.errors;
 			setPartiData(oldData);
-			toast.error(partiData.error.name);
+			toast.error(partiData.error.name || partiData.error.selectedOption);
 		}
 	};
 
@@ -70,8 +78,8 @@ export default function Participent({
 
 	return (
 		<Form onSubmit={handleSubmit}>
-				<h2>{selectedPoll.title}</h2>
-				<h5>{selectedPoll.description}</h5>
+			<h2>{selectedPoll.title}</h2>
+			<h5>{selectedPoll.description}</h5>
 			<div className='d-flex'>
 				<h4>Options</h4>
 				<Button
@@ -90,7 +98,13 @@ export default function Participent({
 			{selectedPoll.options.map((opt) => (
 				<FormGroup className='my-2' key={opt.id}>
 					<Label className='d-flex'>
-						<Input type='radio' value={opt.value} name='selectedOption' />
+						<Input
+							type='radio'
+							value={opt.value}
+							name='selectedOption'
+							id={opt.id}
+							onChange={(e) => handleOpChange(e)}
+						/>
 						<span className='ms-2'>{opt.value}</span>
 						<span
 							className='ms-auto bg-info text-white'
