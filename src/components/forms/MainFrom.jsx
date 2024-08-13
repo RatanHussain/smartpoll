@@ -22,6 +22,7 @@ export default function MainFrom({
 		title: '',
 		description: '',
 		options: optionsArray,
+		opinions: [],
 		error: {},
 	});
 
@@ -83,10 +84,11 @@ export default function MainFrom({
 			let { title, description, options } = formData;
 			let addPoll = { title, description, options };
 			if (isUpdate) {
-				addPoll.id = poll.id;
+				addPoll.id = Number(poll.id);
+				console.log(addPoll);
 				submitData(addPoll);
 			} else {
-				submitData(addPoll);
+				submitData(formData);
 				setFromData({
 					title: '',
 					description: '',
