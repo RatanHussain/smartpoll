@@ -86,7 +86,7 @@ export default function MainFrom({
 			if (isUpdate) {
 				addPoll.id = Number(poll.id);
 				console.log(addPoll);
-				submitData(addPoll);
+				updatePoll(addPoll);
 			} else {
 				submitData(formData);
 				setFromData({

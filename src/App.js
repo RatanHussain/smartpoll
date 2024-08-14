@@ -11,7 +11,7 @@ function App() {
 	let [polls, setPolls] = useState([
 		{
 			id: '45184',
-			title: 'What is Your Favorite Programming Language',
+			title: 'What is Yourfghjgfjgjh Favorite Programming Language',
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
@@ -26,7 +26,7 @@ function App() {
 		},
 		{
 			id: '4545184',
-			title: 'Do You know HTML?',
+			title: 'Do You knoghjfghfgyhjjjjjjjjgjw HTML?',
 			description: 'There are lot of  them what is your favorite?',
 			options: [
 				{ id: 4545423, value: 'sxdfgdfgming', vote: 0 },
@@ -40,7 +40,7 @@ function App() {
 		},
 		{
 			id: '4456184',
-			title: 'There are lot of popular programminge',
+			title: 'There are lot ofgjhghjghjgf popular programminge',
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
