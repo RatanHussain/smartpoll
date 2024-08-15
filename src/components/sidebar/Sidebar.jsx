@@ -7,7 +7,7 @@ import PollItems from './pollItems.jsx';
 import MainFrom from '../forms/MainFrom.jsx';
 
 export default function Sidebar({
-	polls,
+	newPoll,
 	seletPoll,
 	handleSearch,
 	searchTurm,
@@ -25,7 +25,7 @@ export default function Sidebar({
 					type='search'
 					placeholder='Search'
 					value={searchTurm}
-					onChange={(e) => handleSearch(e.value)}
+					onChange={(e) => handleSearch(e.target.value)}
 				/>
 				<Button color='success' onClick={toggleModel} className='ms-5'>
 					new
@@ -33,7 +33,7 @@ export default function Sidebar({
 			</div>
 			<h3>List of Polls</h3>
 			<hr />
-			<PollItems polls={polls} seletPoll={seletPoll} />
+			<PollItems newPoll={newPoll} seletPoll={seletPoll} />
 			<Modal isOpen={modalIs} toggle={toggleModel}>
 				<ModalHeader toggle={toggleModel}>
 					<h4>Create A Poll</h4>

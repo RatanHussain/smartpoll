@@ -3,13 +3,13 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
-export default function PollItems({ polls, seletPoll }) {
-	if (polls.lenght === 0) {
+export default function PollItems({ newPoll, seletPoll }) {
+	if (newPoll.lenght === 0) {
 		return <p>There is not poll</p>;
 	}
 	return (
 		<ListGroup>
-			{polls.map((poll) => (
+			{newPoll.map((poll) => (
 				<ListGroupItem
 					key={poll.id}
 					onClick={() => seletPoll(poll.id)}

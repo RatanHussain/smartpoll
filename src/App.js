@@ -5,49 +5,47 @@ import MainFile from './components/main-content/MainFile';
 import Sidebar from './components/sidebar/Sidebar';
 import { useEffect, useState } from 'react';
 import poll from './components/Data/Polldata';
-import nextId from 'react-id-generator';
 
 function App() {
 	let [polls, setPolls] = useState([
 		{
-			id: '45184',
+			id: '4514534584',
 			title: 'What is Yourfghjgfjgjh Favorite Programming Language',
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
-				{ id: 4564578, value: 'sdfgaogramming', vote: 0 },
-				{ id: 453578, value: 'HFdgamming', vote: 0 },
-				{ id: 454378, value: 'sdfnaSDFmming', vote: 0 },
-				{ id: 45354787, value: 'DSGramming', vote: 0 },
+				{ id: 45644531578, value: 'sdfgaogramming', vote: 0 },
+				{ id: 453354578, value: 'HFdgamming', vote: 0 },
+				{ id: 454371238, value: 'sdfnaSDFmming', vote: 0 },
+				{ id: 453544528787, value: 'DSGramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
 			opinions: [],
 		},
 		{
-			id: '4545184',
+			id: '4545545184',
 			title: 'Do You knoghjfghfgyhjjjjjjjjgjw HTML?',
 			description: 'There are lot of  them what is your favorite?',
 			options: [
-				{ id: 4545423, value: 'sxdfgdfgming', vote: 0 },
-				{ id: 45456645, value: 'sdfsdfgogramming', vote: 0 },
-				{ id: 37345834, value: 'sdndogramming', vote: 0 },
-				{ id: 483456648, value: 'dfgsdPrsdgsdogramming', vote: 0 },
+				{ id: 4545478755423, value: 'sxdfgdfgming', vote: 0 },
+				{ id: 454545456645, value: 'sdfsdfgogramming', vote: 0 },
+				{ id: 37344554526648, value: 'dfgsdPrsdgsdogramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
 			opinions: [],
 		},
 		{
-			id: '4456184',
+			id: '445456184',
 			title: 'There are lot ofgjhghjghjgf popular programminge',
 			description:
 				'There are lot of popular programming languages available. Among them what is your favorite?',
 			options: [
-				{ id: 45434556, value: 'dfgamming', vote: 0 },
-				{ id: 45645654, value: 'dsfgamming', vote: 0 },
-				{ id: 4545685, value: 'sdfgogramming', vote: 0 },
-				{ id: 453467648, value: 'sdhadramming', vote: 0 },
+				{ id: 454344455556, value: 'dfgamming', vote: 0 },
+				{ id: 4564544553654, value: 'dsfgamming', vote: 0 },
+				{ id: 45454564585, value: 'sdfgogramming', vote: 0 },
+				{ id: 453445234567648, value: 'sdhadramming', vote: 0 },
 			],
 			created: new Date(),
 			totalVote: 0,
@@ -55,7 +53,6 @@ function App() {
 		},
 	]);
 	let [selectedPoll, setSelectedPoll] = useState({});
-	let [searchTurm, setSearchTurm] = useState('');
 	let [buttonValue, setButtonValue] = useState('Create Poll');
 
 	// console.log(selectedPoll)
@@ -64,8 +61,14 @@ function App() {
 	// }, []);
 	// console.log(polls)
 
+
+	let  GanateId = () =>{
+		let id = Math.floor(new Date());
+		return id;
+	}
+
 	let addpoll = (poll) => {
-		poll.id = nextId();
+		poll.id = GanateId();
 		poll.created = new Date();
 		poll.totalVote = 0;
 		poll.opinions = [];
@@ -73,9 +76,13 @@ function App() {
 		setPolls([poll, ...polls]);
 	};
 
+
+
+
 	let updatePoll = (updatedPoll) => {
 		let oldPolls = [...polls];
-		let poll = oldPolls.find((po) => po.id === updatedPoll.id);
+		let poll = oldPolls.find((po) => po.id == updatedPoll.id);
+
 		poll.title = updatedPoll.title;
 		poll.description = updatedPoll.description;
 		poll.options = updatedPoll.options;
@@ -94,7 +101,17 @@ function App() {
 		let seletedPoll = polls.find((p) => p.id === seletingPoll);
 		setSelectedPoll(seletedPoll);
 	};
-	let handleSearch = () => {};
+	let [searchTurm, setSearchTurm] = useState('');
+	let handleSearch = (values) => {
+
+		setSearchTurm(values)
+
+	};
+
+	let performSearch = () => {
+		let newpoll =  polls.filter(poll => poll.title.toLowerCase().includes(searchTurm.toLowerCase()))
+		return newpoll
+	}
 
 	let submitData = (addPoll) => {
 		setPolls([...polls, addPoll]);
@@ -111,20 +128,26 @@ function App() {
 		let opinion = {
 			name: response.name,
 			option: response.selectedOption,
-			id: nextId(),
+			id: GanateId(),
 		};
 
 		poll.opinions.push(opinion);
 		setPolls(oldData);
 	};
 
+	let newPoll = performSearch()
+
+
+
+
 	return (
 		<Container className='my-5'>
 			<Row>
 				<Col sm={6} md={6}>
 					<Sidebar
+						searchTurm={searchTurm}
 						handleSearch={handleSearch}
-						polls={polls}
+						newPoll={newPoll}
 						seletPoll={seletPoll}
 						submitData={submitData}
 						buttonValue={buttonValue}

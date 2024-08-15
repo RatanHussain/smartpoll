@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import Forms from './form';
-import nextId from 'react-id-generator';
 import { toast, ToastContainer } from 'react-toastify';
+
+
+
 
 export default function MainFrom({
 	buttonValue,
@@ -12,13 +14,18 @@ export default function MainFrom({
 	isUpdate,
 	poll,
 }) {
+	let  GanateId = () =>{
+		let id = Math.floor(new Date());
+		return id;
+	}
 	let optionsArray = [
-		{ id: nextId(), value: '', vote: 0 },
-		{ id: nextId(), value: '', vote: 0 },
+		{ id: GanateId(), value: '', vote: 0 },
+		{ id: GanateId(), value: '', vote: 0 },
 	];
 
+
 	let [formData, setFromData] = useState({
-		id: nextId(),
+		id: GanateId(),
 		title: '',
 		description: '',
 		options: optionsArray,
@@ -53,7 +60,7 @@ export default function MainFrom({
 		let oldData = { ...formData };
 		if (oldData.options.length < 5) {
 			oldData.options.push({
-				id: nextId(),
+				id: GanateId(),
 				value: '',
 				vote: 0,
 			});
@@ -85,7 +92,6 @@ export default function MainFrom({
 			let addPoll = { title, description, options };
 			if (isUpdate) {
 				addPoll.id = Number(poll.id);
-				console.log(addPoll);
 				updatePoll(addPoll);
 			} else {
 				submitData(formData);
